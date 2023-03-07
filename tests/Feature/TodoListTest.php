@@ -69,7 +69,7 @@ class TodoListTest extends TestCase
         $this->patchJson(route('todo-list.update', $this->todoList->id), ['name' => $updatedName])
              ->assertOk();
 
-        $this->assertDatabaseHas('todo_lists', ['name' => $this->todoList->name]);
+        $this->assertDatabaseHas('todo_lists', ['name' => $updatedName]);
     }
 
     public function test_delete_todo_list(): void

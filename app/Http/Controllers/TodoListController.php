@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoListRequest;
 use App\Models\TodoList;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -28,16 +29,20 @@ class TodoListController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param TodoListRequest $request
      *
      * @return TodoList
      */
-    public function store(Request $request): TodoList
+    public function store(TodoListRequest $request): TodoList
     {
-        $request->validate(['name' => ['required']]);
         return TodoList::create(['name' => $request->name]);
     }
 
+    /**
+     * @param TodoList $todoList
+     *
+     * @return Response
+     */
     public function destroy(TodoList $todoList): Response
     {
         $todoList->delete();
@@ -45,11 +50,9 @@ class TodoListController extends Controller
         return response('', HttpCodeEnum::HTTP_NO_CONTENT);
     }
 
-    public function update(Request $request, TodoList $todoList)
+    public function update(TodoListRequest $request, TodoList $todoList)
     {
-        $request->validate(['name' => ['required']]);
-
-        $todoList->update(['name' => $todoList->name]);
+        $todoList->update(['name' => $request->name]);
 
         return response($todoList);
     }
