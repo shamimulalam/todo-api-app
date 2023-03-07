@@ -16,9 +16,7 @@ class TaskController extends Controller
      */
     public function index(TodoList $todoList): Response
     {
-        $task = Task::where('todo_list_id', '=', $todoList->id)->get();
-
-        return response($task);
+        return response($todoList->tasks);
     }
 
     /**
@@ -28,7 +26,7 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request, TodoList $todoList): Task
     {
-        return Task::create(['title' => $request->title, 'todo_list_id' => $todoList->id]);
+        return $todoList->tasks()->create($request->all());
     }
 
     /**
