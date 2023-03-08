@@ -30,4 +30,12 @@ abstract class TestCase extends BaseTestCase
     {
         return Task::factory()->create(['todo_list_id' => $todoList->id]);
     }
+
+    /**
+     * @return Task
+     */
+    protected function createTaskAlone(): Task
+    {
+        return Task::factory()->create();
+    }
 }

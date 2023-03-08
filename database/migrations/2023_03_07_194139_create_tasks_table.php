@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Task;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +14,10 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('todo_list_id');
-            $table->foreign('todo_list_id')->on('todo_lists')->references('id');
+//            $table->unsignedBigInteger('todo_list_id');
+            $table->foreignId('todo_list_id')->constrained();
             $table->string('title');
+            $table->unsignedSmallInteger('status')->default(Task::STATUS_NOT_STARTED);
             $table->timestamps();
         });
     }
