@@ -2,23 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\TodoList;
+use App\Models\Label;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TodoList>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Label>
  */
-class TodoListFactory extends Factory
+class LabelFactory extends Factory
 {
-    /**
-     * @inheritdoc
-     */
-    protected $model = TodoList::class;
+    protected $model = Label::class;
 
     /**
      * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array
@@ -27,7 +23,8 @@ class TodoListFactory extends Factory
             'user_id' => function () {
                 return User::factory()->create()->id;
             },
-            'name' => $this->faker->sentence,
+            'title'   => $this->faker->words(3, true),
+            'color'   => $this->faker->colorName,
         ];
     }
 }

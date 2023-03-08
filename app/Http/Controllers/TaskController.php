@@ -26,7 +26,7 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request, TodoList $todoList): Task
     {
-        return $todoList->tasks()->create($request->all());
+        return $todoList->tasks()->create($request->validated());
     }
 
     /**
@@ -37,7 +37,7 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task): Response
     {
-        $task->update($request->all());
+        $task->update($request->validated());
 
         return response($task);
     }
